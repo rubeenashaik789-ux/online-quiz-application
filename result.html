@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Course Completion Certificate</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    body {
+        background: #e9eef5;
+        font-family: "Times New Roman", serif;
+    }
+
+    /* ================= CERTIFICATE CONTAINER ================= */
+    .certificate-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    /* ================= CERTIFICATE BODY ================= */
+    .certificate {
+        width: 1100px;
+        height: 750px;
+        background: #ffffff;
+        padding: 80px 100px;
+        position: relative;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        border: 12px solid #1e3a8a;
+    }
+
+    /* Inner decorative border */
+    .certificate::before {
+        content: "";
+        position: absolute;
+        inset: 20px;
+        border: 3px solid #d4af37;
+        pointer-events: none;
+    }
+
+    /* Watermark */
+    .certificate::after {
+        content: "QUIZ PRO";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-30deg);
+        font-size: 120px;
+        color: rgba(30, 58, 138, 0.05);
+        font-weight: bold;
+        letter-spacing: 10px;
+        pointer-events: none;
+    }
+
+    /* ================= HEADER ================= */
+    .cert-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .cert-logo {
+        font-size: 60px;
+        color: #1e3a8a;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    .cert-org {
+        font-size: 16px;
+        letter-spacing: 2px;
+        color: #6b7280;
+    }
+
+    /* ================= TITLES ================= */
+    .cert-title {
+        text-align: center;
+        font-size: 54px;
+        letter-spacing: 6px;
+        color: #1e3a8a;
+        font-weight: bold;
+        margin-top: 30px;
+    }
+
+    .cert-subtitle {
+        text-align: center;
+        font-size: 22px;
+        color: #d4af37;
+        margin-bottom: 45px;
+        letter-spacing: 3px;
+    }
+
+    /* ================= CONTENT ================= */
+    .cert-text {
+        text-align: center;
+        font-size: 19px;
+        color: #111827;
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+
+    .student-name {
+    font-size: 38px;
+    font-weight: bold;
+    color: #b48a1f;
+    margin: 20px 0;
+    border-bottom: 2px solid #d4af37;
+    display: block;            /* Make it full-width block */
+    width: fit-content;        /* Make width just enough for text */
+    padding: 0 30px 5px;
+    text-align: center;
+    margin-left: auto;         /* Center horizontally */
+    margin-right: auto;        /* Center horizontally */
+}
+
+    
+
+    .course-name {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 15px;
+        color: #1e3a8a;
+    }
+
+    /* ================= BADGE ================= */
+    .cert-badge {
+        position: absolute;
+        top: 90px;
+        right: 120px;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #facc15, #d4af37);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #1e3a8a;
+        font-weight: bold;
+        text-align: center;
+        font-size: 14px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    /* ================= FOOTER ================= */
+    .certificate-footer {
+        position: absolute;
+        bottom: 80px;
+        width: 80%;
+        left: 10%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sign-box {
+        text-align: center;
+        width: 220px;
+        border-top: 2px solid #000;
+        padding-top: 6px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    /* ================= BUTTONS ================= */
+    .actions {
+        text-align: center;
+        margin: 40px 0;
+    }
+
+    /* ================= PRINT ================= */
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+        .certificate, .certificate * {
+            visibility: visible;
+        }
+        .certificate {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: none;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="certificate-container">
+    <div class="certificate">
+
+        <!-- Header -->
+        <div class="cert-header">
+            <div class="cert-logo">QUIZ PRO</div>
+            <div class="cert-org">ONLINE LEARNING & CERTIFICATION PLATFORM</div>
+        </div>
+
+      
+
+        <!-- Titles -->
+        <div class="cert-title">CERTIFICATE</div>
+        <div class="cert-subtitle">OF COMPLETION</div>
+
+        <!-- Content -->
+        <p class="cert-text">This is proudly presented to</p>
+
+        <div class="student-name">Sakeena</div>
+
+        <p class="cert-text">
+            for successfully completing the online examination in
+        </p>
+
+        <div class="course-name">Python Programming</div>
+
+        <p class="cert-text mt-4">
+            This certification demonstrates proficiency, dedication, and excellence
+            as evaluated by the Online Quiz System.
+        </p>
+
+        
+
+    </div>
+</div>
+
+<!-- Buttons -->
+<div class="actions">
+    <button onclick="window.print()" class="btn btn-success btn-lg me-3">
+        🖨 Print Certificate
+    </button>
+
+    <a href="course.html" class="btn btn-primary btn-lg">
+        ⬅ Back to Dashboard
+    </a>
+</div>
+
+</body>
+</html>

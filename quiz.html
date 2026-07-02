@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Quiz</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        .navbar {
+            background: #ffffff !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .navbar-brand {
+            color: #4f46e5 !important;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        .timer-box {
+            font-weight: bold;
+            color: #dc2626;
+            font-size: 1.1rem;
+        }
+
+        .student-initial {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 0 12px rgba(79, 70, 229, 0.8);
+        }
+
+        .quiz-container {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+
+        .question-box {
+            background: #f9fafb;
+            border-radius: 14px;
+            padding: 22px;
+            border-left: 6px solid #4f46e5;
+        }
+
+        .question-nav button {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin: 4px;
+            font-weight: bold;
+        }
+
+        .question-nav .active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border: none;
+            padding: 14px 50px;
+            border-radius: 35px;
+            font-size: 1.1rem;
+            color: white;
+            box-shadow: 0 12px 25px rgba(34,197,94,0.6);
+        }
+    </style>
+
+    <script>
+        const subject = localStorage.getItem("selectedCourse");
+        let questions = [];
+        let currentQuestion = 0;
+        let answers = {};
+
+        if (!subject) {
+            alert("Please select a course first");
+            window.location.href = "course.html";
+        }
+
+        window.onload = function () {
+            loadStudentInitial();
+            loadQuestions();
+            renderQuestionNav();
+            showQuestion(0);
+            startTimer();
+        };
+
+        let timeLeft = 10 * 60;
+
+        function startTimer() {
+            const timerDisplay = document.getElementById("timer");
+            setInterval(() => {
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                timerDisplay.textContent = `${m}:${s < 10 ? "0" : ""}${s}`;
+                timeLeft--;
+            }, 1000);
+        }
+
+        function loadStudentInitial() {
+            const name = localStorage.getItem("studentName") || "S";
+            document.getElementById("studentInitial").textContent = name[0];
+        }
+
+        function loadQuestions() {
+
+            if (subject === "c") {
+                questions = [
+                    ["C is a?", "Programming Language", "Markup Language", "Database", "Operating System"],
+                    ["Who developed C?", "Dennis Ritchie", "James Gosling", "Guido van Rossum", "Bjarne Stroustrup"],
+                    ["C file extension?", ".c", ".cpp", ".java", ".py"],
+                    ["Output function?", "printf()", "print()", "cout", "echo()"],
+                    ["Statement ends with?", ";", ":", ".", ","],
+                    ["Loop keyword?", "for", "loop", "repeat", "iterate", "a"],
+                    ["AND operator?", "&&", "&", "||", "|", "a"],
+                    ["Return keyword?", "return", "exit", "break", "continue", "a"],
+                    ["Integer datatype?", "int", "float", "char", "double", "a"],
+                    ["What is #include<stdio.h>?", "Preprocessor directive", "Inclusion directive", "File inclusion directive", "None"]
+                ];
+            }
+
+            if (subject === "python") {
+                questions = [
+                    ["Python is?", "Programming Language", "OS", "Database", "Markup"],
+                    ["Developer?", "Guido van Rossum", "James Gosling", "Dennis Ritchie", "Bjarne"],
+                    ["File extension?", ".py", ".java", ".js", ".php"],
+                    ["Output?", "print()", "echo()", "printf()", "cout"],
+                    ["Loop?", "for", "if", "def", "print"],
+                    ["Comment?", "#", "//", "/* */", "--"],
+                    ["Python is?", "Interpreted", "Compiled", "Binary", "Machine"],
+                    ["Datatype?", "int", "for", "print", "import"],
+                    ["Function keyword?", "def", "func", "define", "method"],
+                    ["Input?", "input()", "scan()", "read()", "get()"]
+                ];
+            }
+
+            if (subject === "java") {
+                questions = [
+                    ["Java is?", "Platform Independent", "Dependent", "Assembly", "Markup"],
+                    ["Extension?", ".java", ".class", ".js", ".py"],
+                    ["Developer?", "James Gosling", "Dennis", "Guido", "Bjarne"],
+                    ["JVM?", "Java Virtual Machine", "Visual", "Joint", "None"],
+                    ["Create object?", "new", "make", "create", "object"],
+                    
+                ];
+            }
+
+            if (subject === "os") {
+                questions = [
+                    ["OS stands for?", "Operating System", "Open", "Order", "Output"],
+                    ["Main role?", "Resource Mgmt", "Gaming", "Coding", "Network"],
+                    ["Not OS?", "Compiler", "Windows", "Linux", "macOS"],
+                    ["CPU scheduling?", "Process Mgmt", "Memory", "File", "I/O"],
+                    ["Real-time OS?", "RTOS", "Batch", "Time", "Distributed"],
+                    ["Brain?", "Kernel", "Shell", "CPU", "RAM"],
+                    ["Paging?", "Memory Mgmt", "File", "CPU", "I/O"],
+                    ["Deadlock?", "Infinite wait", "Crash", "Shutdown", "Boot"],
+                    ["Multi-user?", "Unix", "DOS", "Win98", "None"],
+                    ["Interpreter?", "Shell", "Kernel", "CPU", "BIOS"]
+                ];
+            }
+        }
+
+        function renderQuestionNav() {
+            const nav = document.getElementById("questionNav");
+            nav.innerHTML = "";
+            questions.forEach((_, i) => {
+                nav.innerHTML += `<button type="button" class="btn btn-outline-primary"
+                    onclick="showQuestion(${i})">${i + 1}</button>`;
+            });
+        }
+
+        function showQuestion(index) {
+            currentQuestion = index;
+            const q = questions[index];
+            const box = document.getElementById("quizBox");
+
+            box.innerHTML = `
+                <div class="question-box">
+                    <p><b>${index + 1}. ${q[0]}</b></p>
+                    ${q.slice(1).map((opt, i) => `
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}"
+                                ${answers[index] == i ? "checked" : ""}
+                                onchange="saveAnswer(${index}, ${i})">
+                            ${opt}
+                        </label><br>
+                    `).join("")}
+                </div>
+            `;
+
+            document.querySelectorAll(".question-nav button").forEach((b, i) => {
+                b.classList.toggle("active", i === index);
+            });
+        }
+
+        function saveAnswer(q, a) {
+            answers[q] = a;
+        }
+        
+
+    </script>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="container d-flex justify-content-between">
+        <span class="navbar-brand">Quiz Pro – Online Examination</span>
+        <div class="d-flex gap-4">
+            <div class="timer-box">⏱ <span id="timer">10:00</span></div>
+            <div id="studentInitial" class="student-initial"></div>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 mb-5">
+    <form action="result.html">
+        <div class="quiz-container">
+            <div class="question-nav text-center mb-4" id="questionNav"></div>
+            <div id="quizBox"></div>
+
+            <div class="text-center mt-4">
+                <button class="submit-btn">Submit Quiz</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

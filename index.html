@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Pro | Online Quiz System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+body {
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(120deg, #6f42c1, #4f46e5, #0f172a);
+    background-size: 300% 300%;
+    animation: bgMove 12s ease infinite;
+    overflow-x: hidden;
+    position: relative;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body::before,
+body::after {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.6;
+    z-index: 0;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    position: relative;
+    z-index: 20;
+}
+
+.student-img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.main-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    position: relative;
+}
+
+.portal-box {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(22px);
+    padding: 65px;
+    border-radius: 26px;
+    width: 100%;
+    max-width: 540px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+/* 🔧 FIX IS HERE */
+.portal-box::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.6),
+        transparent
+    );
+    opacity: 0.6;
+    pointer-events: none; /* ✅ ALLOWS BUTTON CLICKS */
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #22c55e, #15803d);
+    border: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #6f42c1, #6366f1);
+    border: none;
+}
+
+.btn-lg {
+    width: 100%;
+    border-radius: 40px;
+    padding: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <i class="bi bi-patch-check-fill"></i> Quiz Pro
+        </a>
+
+        <div class="ms-auto">
+            <a href="login.html">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                     class="student-img" alt="Student">
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="main-section">
+    <div class="portal-box">
+        <h1>Quiz Pro</h1>
+        <p>Professional Online Examination Portal</p>
+
+        <a href="register.html" class="btn btn-success btn-lg mb-3">
+            Student Register
+        </a>
+
+        <a href="login.html" class="btn btn-primary btn-lg">
+            Student Login
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
